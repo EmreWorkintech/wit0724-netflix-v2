@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import GenreContainer from "./GenreContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { isValidEmail, isValidPassword } from "../utils/validationRules";
@@ -60,6 +60,14 @@ function SignInForm() {
   });
   const [isValid, setIsValid] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    if (isValidEmail(formData.eposta) && isValidPassword(formData.sifre)) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [formData]);
 
   function handleSubmit(event) {
     event.preventDefault();
