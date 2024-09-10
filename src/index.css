@@ -25,3 +25,10 @@ body {
       transform: rotate(360deg);
   }
   } 
+
+  footer {
+    background: rgb(225, 225, 225);
+    height: 10vh;
+    border-top: 1px solid gray;
+    width: 100%;
+  }
