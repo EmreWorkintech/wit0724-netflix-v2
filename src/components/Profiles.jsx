@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import { profiles } from "../data";
 import Profile from "./Profile";
@@ -9,8 +10,9 @@ const ProfilesSection = styled.section`
   justify-content: center;
 `;
 
-function Profiles() {
+function Profiles(props) {
   const [profileList, setProfileList] = useState([]);
+  const { setActiveProfile } = props;
 
   useEffect(() => {
     //axios.get profiles
@@ -20,7 +22,11 @@ function Profiles() {
   return (
     <ProfilesSection>
       {profileList.map((item, index) => (
-        <Profile profile={item} key={index} />
+        <Profile
+          profile={item}
+          key={index}
+          setActiveProfile={setActiveProfile}
+        />
       ))}
     </ProfilesSection>
   );

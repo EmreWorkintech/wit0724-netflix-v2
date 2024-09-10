@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import Profiles from "../components/Profiles";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -24,11 +25,13 @@ const Button = styled(Link)`
   margin-top: 2rem;
 `;
 
-function Welcome() {
+function Welcome(props) {
+  const { setActiveProfile } = props;
+
   return (
     <WelcomePage>
-      <Title>Who's Watching</Title>
-      <Profiles />
+      <Title>Who&apos;s Watching</Title>
+      <Profiles setActiveProfile={setActiveProfile} />
       <Button>Manage Profiles</Button>
     </WelcomePage>
   );
