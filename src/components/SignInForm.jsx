@@ -3,7 +3,11 @@ import GenreContainer from "./GenreContainer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { isValidEmail, isValidPassword } from "../utils/validationRules";
+import {
+  isGenresValid,
+  isValidEmail,
+  isValidPassword,
+} from "../utils/validationRules";
 
 const Form = styled.form`
   width: 50%;
@@ -42,9 +46,9 @@ const Button = styled.button`
 `;
 
 const initialFormData = {
-  eposta: "emre@wit.com.tr",
-  sifre: "12345678",
-  genres: ["action", "crime"],
+  eposta: "",
+  sifre: "",
+  genres: ["action", "crime", "fantasy"],
 };
 
 const ErrorMessage = styled.p`
@@ -56,13 +60,17 @@ function SignInForm() {
   const [error, setError] = useState({
     email: "",
     sifre: "",
-    genre: "",
+    genres: "",
   });
   const [isValid, setIsValid] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
-    if (isValidEmail(formData.eposta) && isValidPassword(formData.sifre)) {
+    if (
+      isValidEmail(formData.eposta) &&
+      isValidPassword(formData.sifre) &&
+      isGenresValid(formData.genres)
+    ) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -83,8 +91,7 @@ function SignInForm() {
   }
 
   function handleChange(event) {
-    const { value, name } = event.target;
-    setFormData({ ...formData, [name]: value });
+    let { value, name } = event.target;
 
     if (name === "eposta") {
       if (isValidEmail(value)) {
@@ -106,6 +113,28 @@ function SignInForm() {
         });
       }
     }
+
+    if (name === "genres") {
+      let newGenres;
+      if (formData.genres.includes(value)) {
+        newGenres = formData.genres.filter((item) => item !== value);
+      } else {
+        newGenres = [...formData.genres, value];
+      }
+
+      if (isGenresValid(newGenres)) {
+        setError({ ...error, [name]: "" });
+      } else {
+        setError({
+          ...error,
+          [name]: "En az 3 en fazla 5 genre seçebilirsiniz.",
+        });
+      }
+
+      value = newGenres;
+    }
+
+    setFormData({ ...formData, [name]: value });
   }
 
   return (
@@ -136,8 +165,8 @@ function SignInForm() {
         <p>
           <b>Select your favorite genres</b>
         </p>
-        <GenreContainer />
-        {error.genre && <ErrorMessage>{error.genre}</ErrorMessage>}
+        <GenreContainer formData={formData} handleChange={handleChange} />
+        {error.genres && <ErrorMessage>{error.genres}</ErrorMessage>}
       </div>
       <Button disabled={!isValid}>Sign Up</Button>
     </Form>

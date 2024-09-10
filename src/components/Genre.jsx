@@ -6,11 +6,18 @@ const Label = styled.label`
 `;
 
 function Genre(props) {
-  const { genre } = props;
+  const { genre, isSelected, handleChange } = props;
 
   return (
     <Label>
-      <input type="checkbox" name="genre" value={genre} /> {genre}
+      <input
+        type="checkbox"
+        name="genres"
+        value={genre}
+        checked={isSelected}
+        onChange={handleChange}
+      />{" "}
+      {genre}
     </Label>
   );
 }

@@ -18,3 +18,7 @@ export const isValidPasswordByRegex = (pass) => {
   var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   return re.test(pass);
 };
+
+export const isGenresValid = (genres) => {
+  return genres.length >= 3 && genres.length <= 5;
+};
