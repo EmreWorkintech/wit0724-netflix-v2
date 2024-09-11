@@ -27,9 +27,7 @@ function Profiles(props) {
         console.log(error.messsage);
       })
       .finally(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
+        setIsLoading(false);
       });
   }, []);
 
