@@ -48,7 +48,7 @@ const Button = styled.button`
 const initialFormData = {
   eposta: "",
   sifre: "",
-  genres: ["action", "crime", "fantasy"],
+  genres: [],
 };
 
 const ErrorMessage = styled.p`
@@ -151,24 +151,34 @@ function SignInForm() {
         placeholder="Email"
         onChange={handleChange}
         value={formData.eposta}
+        data-testid="signup-form-email"
       />
-      {error.eposta && <ErrorMessage>{error.eposta}</ErrorMessage>}
+      {error.eposta && (
+        <ErrorMessage data-testid="error">{error.eposta}</ErrorMessage>
+      )}
       <Input
         type="password"
         name="sifre"
         placeholder="Add a password"
         onChange={handleChange}
         value={formData.sifre}
+        data-testid="signup-form-password"
       />
-      {error.sifre && <ErrorMessage>{error.sifre}</ErrorMessage>}
+      {error.sifre && (
+        <ErrorMessage data-testid="error">{error.sifre}</ErrorMessage>
+      )}
       <div>
         <p>
           <b>Select your favorite genres</b>
         </p>
         <GenreContainer formData={formData} handleChange={handleChange} />
-        {error.genres && <ErrorMessage>{error.genres}</ErrorMessage>}
+        {error.genres && (
+          <ErrorMessage data-testid="error">{error.genres}</ErrorMessage>
+        )}
       </div>
-      <Button disabled={!isValid}>Sign Up</Button>
+      <Button disabled={!isValid} data-testid="signup-form-button">
+        Sign Up
+      </Button>
     </Form>
   );
 }
