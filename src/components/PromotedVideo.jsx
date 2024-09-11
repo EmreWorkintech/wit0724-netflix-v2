@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import Video from "./Video";
 import Header from "../layouts/Header";
