@@ -4,6 +4,17 @@ import Movies from "./Movies";
 import Title from "./Title";
 //import axios from "axios";
 import { movies } from "../../data";
+import styled from "styled-components";
+
+const PanelArea = styled.div`
+  margin: 3rem auto;
+  padding: 0 2rem;
+  z-index: 999;
+
+  &:first-of-type {
+    margin-top: -200px;
+  }
+`;
 
 function SuggestionPanel() {
   const [data, setData] = useState([]);
@@ -27,12 +38,12 @@ function SuggestionPanel() {
   }, []);
 
   return (
-    <div>
-      <Title title={"Suggestion Title"} />
+    <PanelArea>
+      <Title title={"Continue Watching"} />
       <Movies
         movieList={data.filter((item) => item.poster_path !== undefined)}
       />
-    </div>
+    </PanelArea>
   );
 }
 

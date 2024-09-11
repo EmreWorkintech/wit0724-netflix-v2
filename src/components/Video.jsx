@@ -3,7 +3,7 @@ import video from "../assets/movies/1104.mp4";
 
 const VideoContainer = styled.video`
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   object-fit: cover;
 `;
 

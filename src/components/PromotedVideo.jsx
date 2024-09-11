@@ -4,8 +4,9 @@ import Video from "./Video";
 import Header from "../layouts/Header";
 
 const Hero = styled.main`
-  height: 80vh;
+  height: 90vh;
   position: relative;
+  z-index: -1;
 `;
 
 const FixedHeader = styled.div`
